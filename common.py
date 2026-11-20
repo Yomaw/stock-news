@@ -58,3 +58,6 @@ def send_telegram(text):
                 },
                 timeout=30,
             ).raise_for_status()
+def get_text(resp):
+    """Return only the text parts of a Claude reply (skips 'thinking' blocks)."""
+    return "".join(b.text for b in resp.content if b.type == "text").strip()
