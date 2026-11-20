@@ -1,6 +1,7 @@
 name: Price alert
 
 on:
+  push:
   schedule:
     - cron: "*/30 13-21 * * 1-5"
   workflow_dispatch:

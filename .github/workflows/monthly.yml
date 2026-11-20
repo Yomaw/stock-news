@@ -1,6 +1,7 @@
 name: Monthly report
 
 on:
+  push:
   schedule:
     - cron: "0 8 1 * *"
   workflow_dispatch:
