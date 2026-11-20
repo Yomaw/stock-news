@@ -5,7 +5,7 @@ from pathlib import Path
 import anthropic
 import yfinance as yf
 
-from common import PORTFOLIO, FAST_MODEL, send_telegram
+from common import PORTFOLIO, FAST_MODEL, send_telegram, get_text
 
 STATE_FILE = Path("alert_state.json")
 HISTORY_FILE = Path("history.json")
@@ -52,11 +52,11 @@ def explain(stock, pct, headlines):
     )
     resp = client.messages.create(
         model=FAST_MODEL,
-        max_tokens=400,
+        max_tokens=1500,
         system=SYSTEM,
         messages=[{"role": "user", "content": prompt}],
     )
-    return resp.content[0].text.strip()
+    return get_text(resp)
 
 
 def main():

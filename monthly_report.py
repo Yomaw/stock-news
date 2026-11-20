@@ -11,6 +11,7 @@ from common import (
     BENCHMARK_SYMBOL,
     REPORT_MODEL,
     send_telegram,
+    get_text,
 )
 
 HISTORY_FILE = Path("history.json")
@@ -126,11 +127,11 @@ Write my monthly report with this structure:
 
     resp = client.messages.create(
         model=REPORT_MODEL,
-        max_tokens=3000,
+        max_tokens=8000,
         system=SYSTEM,
         messages=[{"role": "user", "content": prompt}],
     )
-    send_telegram("📊 MONTHLY REPORT\n\n" + resp.content[0].text)
+    send_telegram("📊 MONTHLY REPORT\n\n" + get_text(resp))
 
 
 if __name__ == "__main__":

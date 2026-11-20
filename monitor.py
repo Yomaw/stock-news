@@ -8,7 +8,7 @@ from urllib.parse import quote
 import feedparser
 import anthropic
 
-from common import PORTFOLIO, FAST_MODEL, send_telegram
+from common import PORTFOLIO, FAST_MODEL, send_telegram, get_text
 
 MIN_IMPORTANCE = 2
 MAX_PER_STOCK = 8
@@ -84,11 +84,11 @@ Return ONLY a JSON list with one object per headline, like:
 [{{"id": 0, "importance": 2, "message": "Plain-English explanation here."}}]"""
     resp = client.messages.create(
         model=FAST_MODEL,
-        max_tokens=2000,
+        max_tokens=4000,
         system=SYSTEM,
         messages=[{"role": "user", "content": prompt}],
     )
-    text = re.sub(r"```(?:json)?", "", resp.content[0].text).strip()
+    text = re.sub(r"```(?:json)?", "", get_text(resp)).strip()
     return json.loads(text)
 
 
