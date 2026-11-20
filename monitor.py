@@ -96,6 +96,7 @@ def main():
     seen = load_seen()
     history = load_history()
     emoji = {3: "🔴", 2: "🟡", 1: "🟢"}
+    failed_stocks = []
 
     for stock in PORTFOLIO:
         try:
@@ -125,9 +126,14 @@ def main():
             seen.update(it["id"] for it in new)
         except Exception as e:
             print(f"Problem with {stock['ticker']}: {e}")
+            failed_stocks.append(stock["ticker"])
 
     save_seen(seen)
     save_history(history)
+    if failed_stocks:
+        raise RuntimeError(
+            f"News monitor failed for: {', '.join(failed_stocks)}"
+        )
 
 
 if __name__ == "__main__":

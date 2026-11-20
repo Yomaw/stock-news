@@ -49,7 +49,7 @@ def send_telegram(text):
     chunks.append(current)
     for chunk in chunks:
         if chunk.strip():
-            requests.post(
+            response = requests.post(
                 f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
                 json={
                     "chat_id": TG_CHAT,
@@ -57,7 +57,16 @@ def send_telegram(text):
                     "disable_web_page_preview": True,
                 },
                 timeout=30,
-            ).raise_for_status()
+            )
+            response.raise_for_status()
+            result = response.json()
+            if not result.get("ok"):
+                raise RuntimeError(
+                    f"Telegram rejected message: {result.get('description', 'unknown API error')}"
+                )
+            print(f"Telegram accepted message_id={result['result']['message_id']}")
+
+
 def get_text(resp):
     """Return only the text parts of a Claude reply (skips 'thinking' blocks)."""
     return "".join(b.text for b in resp.content if b.type == "text").strip()
