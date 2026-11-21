@@ -10,7 +10,7 @@ import anthropic
 
 from common import PORTFOLIO, FAST_MODEL, send_telegram, get_text
 
-MIN_IMPORTANCE = 2
+MIN_IMPORTANCE = 4   # nothing scores 4, so no individual alerts; everything is still saved to history.json
 MAX_PER_STOCK = 8
 SEEN_FILE = Path("seen.json")
 HISTORY_FILE = Path("history.json")

@@ -29,6 +29,22 @@ PORTFOLIO = [
         "alert_pct": 3,
         "why": "Warren Buffett's conglomerate: insurance, railroads, energy, and a large stock portfolio. Usually slow-moving.",
     },
+    {
+        "ticker": "ON",
+        "name": "ON Semiconductor (onsemi)",
+        "query": '"onsemi" OR "ON Semiconductor" stock',
+        "price_symbol": "ON",
+        "alert_pct": 5,
+        "why": "Makes power chips and sensors used in electric vehicles, cars and industrial equipment. Sensitive to EV demand, the auto industry cycle and competition.",
+    },
+    {
+        "ticker": "TSM",
+        "name": "Taiwan Semiconductor (TSMC)",
+        "query": '"TSMC" OR "Taiwan Semiconductor" stock',
+        "price_symbol": "TSM",
+        "alert_pct": 5,
+        "why": "World's largest contract chip maker; produces chips for companies like Nvidia and Apple. Sensitive to AI demand, export rules and Taiwan-related tensions.",
+    },
 ]
 
 BENCHMARK_NAME = "S&P 500 (the overall US market)"
